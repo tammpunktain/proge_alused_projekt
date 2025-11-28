@@ -1,30 +1,6 @@
 import tkinter as tk
-from datetime import date
-
-def lisa_harjumus():
-    #harjumuse lisamisel sisendisse kuvab teate ja kustutab sisendi
-    harjumus = sisend.get()
-    if harjumus:
-        teade.config(text=f'Lisatud {harjumus}')
-        sisend.delete(0, tk.END)
-        with open('harjumused.txt', 'a', encoding='utf-8') as harjumused:
-            harjumused.write(harjumus + '\n')
-        
-        harjumused_lst.append(harjumus)
-
-        rida = len(harjumused_lst) - 1
-
-        tk.Label(tabel, text=harjumus, font=('Arial', 12)).grid(row=rida, column=0, padx=10, pady=5)
-        tk.Button(tabel, text='✅Tehtud!', width=12, fg='green', command=lambda h=harjumus: tehtud(h)).grid(row=rida, column=1, padx=5)
-        tk.Button(tabel, text='❌Jäi vahele.', width=12, fg='red', command=lambda h=harjumus: tegemata(h)).grid(row=rida, column=2, padx=5)
-
-def tehtud(harjumus):
-    with open('andmed.txt', 'a', encoding='utf-8') as andmed:
-        andmed.write(f'{tanane},{harjumus},tehtud\n')
-
-def tegemata(harjumus):
-    with open('andmed.txt', 'a', encoding='utf-8') as andmed:
-        andmed.write(f'{tanane},{harjumus},tegemata\n')
+from avaleht import loo_avaleht
+from heatmap import loo_heatmap
 
 def vaheta_lehte(leht):
     leht_1.pack_forget()
@@ -32,14 +8,12 @@ def vaheta_lehte(leht):
     leht.pack()
 
 aken = tk.Tk()
-#tekitab akna
-
 aken.title('Harjumuste jälgija')
 aken.geometry('400x300')
 
 '''lehed'''
-leht_1 = tk.Frame(aken)
-leht_2 = tk.Frame(aken)
+leht_1 = loo_avaleht(aken)
+leht_2 = loo_heatmap(aken)
 
 '''menyy'''
 menyy = tk.Frame(aken)
@@ -47,57 +21,6 @@ leht_1_nupp = tk.Button(menyy, text='Avaleht', width=30, command=lambda: vaheta_
 leht_1_nupp = tk.Button(menyy, text='Kokkuvote', width=30, command=lambda: vaheta_lehte(leht_2)).grid(row=0, column=1, padx=5)
 menyy.pack(pady=10)
 vaheta_lehte(leht_1)    #paneb kohe avalehe ekraanile
-
-
-
-'''teine leht'''
-pk = tk.Label(leht_2, text='leht 2' , font=25).pack(pady=10)
-
-
-'''avaleht'''
-
-tervitus = tk.Label(
-    leht_1,
-    text = 'Tere tulemast harjumuste jalgijasse, kus saate oma harjumusi jalgida!',
-    font=('Arial', 14),
-    fg='blue'
-)
-tervitus.pack()
-
-
-sisend = tk.Entry(leht_1, width=30)
-sisend.pack(pady=10)
-
-nupp = tk.Button(leht_1, text='Lisa harjumus', command=lisa_harjumus)
-nupp.pack(pady=5)
-#vajutamisel kutsub valja funktsiooni
-
-teade = tk.Label(leht_1, text='')
-teade.pack(pady=10)
-#config muudab teate sisu, mis muidu on tyhi
-
-tanane = date.today()
-
-kuupaev = tk.Label(leht_1, text=f'Täna on {tanane}', font=('Arial', 12)).pack(pady=10)
-#kuvab tänase kuupäeva
-
-tabel = tk.Frame(leht_1)
-tabel.pack(pady=10)
-
-
-with open('harjumused.txt', 'r', encoding='utf-8') as file:
-    harjumused_lst = []
-    for harjumus in file:
-        harjumus = harjumus.strip()
-        harjumused_lst.append(harjumus)
-
-for rida, harjumus in enumerate(harjumused_lst):
-   harjumus_salvestus = tk.Label(tabel, text=harjumus, font=('Arial', 12))
-   harjumus_salvestus.grid(row=rida, column=0, padx=10, pady=5)
-   tk.Button(tabel, text='✅Tehtud!', width=12, fg='green', command=lambda h=harjumus: tehtud(h)).grid(row=rida, column=1, padx=5)
-   tk.Button(tabel, text='❌Jäi vahele.', width=12, fg='red', command=lambda h=harjumus: tegemata(h)).grid(row=rida, column=2, padx=5)
-
-
 
 
 aken.mainloop()
