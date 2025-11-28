@@ -18,7 +18,7 @@ leht_2 = loo_heatmap(aken)
 '''menyy'''
 menyy = tk.Frame(aken)
 leht_1_nupp = tk.Button(menyy, text='Avaleht', width=30, command=lambda: vaheta_lehte(leht_1)).grid(row=0, column=0, padx=5)
-leht_1_nupp = tk.Button(menyy, text='Kokkuvote', width=30, command=lambda: vaheta_lehte(leht_2)).grid(row=0, column=1, padx=5)
+leht_1_nupp = tk.Button(menyy, text='Heatmap', width=30, command=lambda: vaheta_lehte(leht_2)).grid(row=0, column=1, padx=5)
 menyy.pack(pady=10)
 vaheta_lehte(leht_1)    #paneb kohe avalehe ekraanile
 
