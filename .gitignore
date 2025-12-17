@@ -1,2 +1,4 @@
 harjumused.txt
 andmed.txt
+__pycache__/
+*.pyc
