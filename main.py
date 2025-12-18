@@ -6,7 +6,7 @@ Requirements: NumPy, Matplotlib
 
 Autorid: Ville Fohs, Ain Tamm
 
-Kasutatud allikad: W3Schools, Stack Overflow, ChatGPT, matplotlib dokumentatsioon
+Kasutatud allikad: W3Schools, Stack Overflow, matplotlib dokumentatsioon
 
 '''
 
